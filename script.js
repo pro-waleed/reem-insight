@@ -7,6 +7,12 @@ const create = (tag, className, content) => {
   return node;
 };
 
+const createLinkButton = (href, label, className = "button button-primary") => {
+  const link = create("a", className, label);
+  link.href = href;
+  return link;
+};
+
 const renderHeroStats = () => {
   const container = document.getElementById("hero-stats");
   if (!container || !window.appData) return;
@@ -65,6 +71,12 @@ const createOpportunityCard = (item) => {
   article.append(create("span", "op-tag", item.label));
   article.append(create("h3", "", item.title));
   article.append(create("p", "", item.description));
+
+  const meta = create("div", "opportunity-meta");
+  meta.append(create("span", "data-pill", `المشتري: ${item.buyer}`));
+  meta.append(create("span", "data-pill", `الإيراد: ${item.revenueModel}`));
+  article.append(meta);
+
   article.append(create("p", "opportunity-note", item.whyNow));
   article.append(create("p", "opportunity-pilot", `نقطة الانطلاق المقترحة: ${item.pilot}`));
 
@@ -190,12 +202,49 @@ const renderPricing = () => {
 
   appData.pricing.forEach((plan) => {
     const article = create("article", `price-card${plan.featured ? " featured" : ""}`);
+    article.append(create("span", "signal-source", plan.access));
     article.append(create("h3", "", plan.name));
-    article.append(create("strong", "", plan.price));
+    article.append(create("strong", "plan-price", plan.price));
+    article.append(create("p", "plan-audience", plan.bestFor));
 
     const list = create("ul", "bullet-list");
     plan.features.forEach((feature) => list.append(create("li", "", feature)));
     article.append(list);
+
+    const actions = create("div", "plan-actions");
+    actions.append(createLinkButton("reports.html#interest-form", plan.cta, "button button-primary button-block"));
+    actions.append(create("span", "plan-meta", `مستوى الوصول: ${plan.access}`));
+    article.append(actions);
+
+    container.append(article);
+  });
+};
+
+const renderStudies = () => {
+  const container = document.getElementById("study-grid");
+  if (!container || !window.appData || !appData.studies) return;
+
+  appData.studies.forEach((study) => {
+    const article = create("article", "study-card");
+
+    const top = create("div", "study-top");
+    top.append(create("span", "signal-source", study.type));
+    top.append(create("span", "study-badge", study.badge));
+    article.append(top);
+
+    article.append(create("h3", "", study.title));
+    article.append(create("p", "", study.summary));
+
+    const meta = create("div", "study-meta");
+    meta.append(create("span", "data-pill", `السعر: ${study.price}`));
+    meta.append(create("span", "data-pill", `الوصول: ${study.access}`));
+    article.append(meta);
+
+    const actions = create("div", "study-actions");
+    actions.append(createLinkButton("reports.html#interest-form", "شراء الدراسة", "button button-primary"));
+    actions.append(createLinkButton("pricing.html", "مقارنة الباقات", "button button-secondary"));
+    article.append(actions);
+
     container.append(article);
   });
 };
@@ -214,6 +263,7 @@ const renderServices = () => {
     const list = create("ul", "bullet-list");
     pkg.services.forEach((item) => list.append(create("li", "", item)));
     article.append(list);
+    article.append(createLinkButton("reports.html#interest-form", "اطلب هذه الخدمة", "button button-secondary button-block"));
     container.append(article);
   });
 };
@@ -299,6 +349,28 @@ const renderSources = () => {
     link.rel = "noreferrer";
     article.append(link);
 
+    container.append(article);
+  });
+};
+
+const renderSectorChart = () => {
+  const container = document.getElementById("sector-chart");
+  if (!container || !window.appData || !appData.chartSeries) return;
+
+  appData.chartSeries.forEach((item) => {
+    const article = create("article", "bar-item");
+
+    const meta = create("div", "bar-meta");
+    meta.append(create("strong", "", `${item.value}/100`));
+    meta.append(create("span", "", item.label));
+
+    const track = create("div", "bar-track");
+    const fill = create("div", "bar-fill");
+    fill.style.height = `${item.value}%`;
+    track.append(fill);
+
+    article.append(meta);
+    article.append(track);
     container.append(article);
   });
 };
@@ -517,12 +589,14 @@ renderSectorSignals();
 renderOpportunityFilters();
 renderReports();
 renderPricing();
+renderStudies();
 renderServices();
 renderCities();
 renderDataTable();
 renderDemandSamples();
 renderDemoClients();
 renderSources();
+renderSectorChart();
 renderPlayers();
 renderReportDetail();
 renderInvestmentCase();

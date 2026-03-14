@@ -174,6 +174,7 @@ a {
   border-radius: 999px;
   font-weight: 700;
   border: 1px solid transparent;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
 
 .button-primary {
@@ -184,6 +185,11 @@ a {
 .button-secondary {
   background: rgba(255, 250, 242, 0.9);
   border-color: var(--line);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 18px 34px rgba(26, 31, 26, 0.12);
 }
 
 .hero-points {
@@ -205,17 +211,80 @@ a {
 .hero-panel,
 .pulse-card,
 .metric,
+.value-card,
 .sector-panel,
 .opportunity-card,
 .showcase-card,
 .report-card,
 .price-card,
+.study-card,
+.service-card,
+.city-card,
+.player-card,
+.investment-card,
 .roadmap-grid article,
+.sector-overview-card,
+.sector-detail-card,
+.method-card,
+.score-card,
 .contact-card {
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: 1.6rem;
   box-shadow: var(--shadow);
+}
+
+.opportunity-card,
+.price-card,
+.study-card,
+.service-card,
+.city-card,
+.player-card,
+.signal-card,
+.report-card,
+.source-card,
+.value-card,
+.sector-overview-card,
+.sector-detail-card,
+.investment-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.opportunity-card::before,
+.price-card::before,
+.study-card::before,
+.service-card::before,
+.city-card::before,
+.player-card::before,
+.report-card::before,
+.value-card::before,
+.investment-card::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  height: 0.28rem;
+  background: linear-gradient(90deg, rgba(184, 138, 47, 0.95), rgba(23, 76, 82, 0.8));
+}
+
+.opportunity-card:hover,
+.price-card:hover,
+.study-card:hover,
+.service-card:hover,
+.city-card:hover,
+.player-card:hover,
+.signal-card:hover,
+.report-card:hover,
+.source-card:hover,
+.value-card:hover,
+.sector-overview-card:hover,
+.sector-detail-card:hover,
+.investment-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 26px 54px rgba(47, 35, 14, 0.16);
+  border-color: rgba(184, 138, 47, 0.25);
 }
 
 .pulse-card {
@@ -433,6 +502,12 @@ a {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.study-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .player-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -507,6 +582,25 @@ a {
   margin-bottom: 0.85rem;
   color: var(--teal);
   font-weight: 800;
+}
+
+.opportunity-meta,
+.study-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0.9rem 0;
+}
+
+.data-pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(23, 76, 82, 0.08);
+  color: var(--teal);
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .score-row {
@@ -660,6 +754,131 @@ a {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.plan-price {
+  display: inline-block;
+  margin: 0.35rem 0 0.7rem;
+  font-size: 2rem;
+}
+
+.plan-audience {
+  min-height: 4.5rem;
+  margin-bottom: 1rem;
+}
+
+.plan-actions,
+.study-actions {
+  display: grid;
+  gap: 0.75rem;
+  margin-top: 1.2rem;
+}
+
+.plan-meta {
+  color: var(--muted);
+  font-size: 0.92rem;
+  font-weight: 700;
+}
+
+.button-block {
+  width: 100%;
+}
+
+.study-card p,
+.plan-audience {
+  color: var(--muted);
+  line-height: 1.8;
+}
+
+.study-top,
+.bar-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  align-items: center;
+}
+
+.study-badge {
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(184, 138, 47, 0.14);
+  color: var(--gold-dark);
+  font-size: 0.88rem;
+  font-weight: 800;
+}
+
+.chart-panel {
+  padding: 1.35rem;
+  background:
+    linear-gradient(180deg, rgba(255, 250, 242, 0.84), rgba(255, 250, 242, 0.68)),
+    radial-gradient(circle at top left, rgba(23, 76, 82, 0.08), transparent 22rem);
+  border: 1px solid var(--line);
+  border-radius: 1.6rem;
+  box-shadow: var(--shadow);
+}
+
+.bar-chart {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  align-items: end;
+  min-height: 20rem;
+}
+
+.bar-item {
+  display: grid;
+  gap: 1rem;
+}
+
+.bar-meta strong {
+  font-size: 1.15rem;
+  color: var(--teal);
+}
+
+.bar-meta span {
+  color: var(--muted);
+  font-weight: 700;
+}
+
+.bar-track {
+  position: relative;
+  height: 15rem;
+  padding: 0.4rem;
+  border-radius: 1.3rem;
+  background:
+    linear-gradient(180deg, rgba(184, 138, 47, 0.08), rgba(23, 76, 82, 0.08)),
+    repeating-linear-gradient(
+      to top,
+      transparent 0,
+      transparent 2.8rem,
+      rgba(31, 27, 22, 0.06) 2.8rem,
+      rgba(31, 27, 22, 0.06) 2.9rem
+    );
+  border: 1px solid rgba(31, 27, 22, 0.08);
+  overflow: hidden;
+}
+
+.bar-fill {
+  position: absolute;
+  inset: auto 0.45rem 0.45rem 0.45rem;
+  border-radius: 1rem 1rem 0.8rem 0.8rem;
+  background:
+    linear-gradient(180deg, rgba(184, 138, 47, 0.95), rgba(23, 76, 82, 0.92));
+  box-shadow: 0 16px 24px rgba(23, 76, 82, 0.18);
+  animation: rise-bar 900ms ease forwards;
+  transform-origin: bottom;
+}
+
+@keyframes rise-bar {
+  from {
+    transform: scaleY(0.15);
+    opacity: 0.5;
+  }
+
+  to {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+}
+
 .featured {
   background: linear-gradient(180deg, rgba(23, 76, 82, 0.92), rgba(27, 57, 60, 0.98));
   color: #fff8ee;
@@ -669,7 +888,9 @@ a {
 .featured ul,
 .featured p,
 .featured h3,
-.featured strong {
+.featured strong,
+.featured .plan-meta,
+.featured .signal-source {
   color: inherit;
 }
 
@@ -783,6 +1004,8 @@ textarea {
   .showcase-grid,
   .report-grid,
   .pricing-grid,
+  .study-grid,
+  .bar-chart,
   .roadmap-grid,
   .opportunity-grid,
   .method-grid,
@@ -817,6 +1040,8 @@ textarea {
   .showcase-grid,
   .report-grid,
   .pricing-grid,
+  .study-grid,
+  .bar-chart,
   .roadmap-grid,
   .opportunity-grid,
   .pulse-grid,
