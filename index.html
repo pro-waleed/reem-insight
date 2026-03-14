@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ريم إنسايت | منصة تحليل السوق اليمنية</title>
+  <meta name="description" content="منصة عربية لدراسة وتحليل السوق اليمنية وتقييم الفرص الاستثمارية في القطاعات التقنية.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="home">
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">ر</span>
+        <span class="brand-copy">
+          <strong>ريم إنسايت</strong>
+          <small>منصة استخبارات السوق اليمنية</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="فتح القائمة">القائمة</button>
+      <nav class="nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="sectors.html">القطاعات</a>
+        <a href="opportunities.html">الفرص</a>
+        <a href="reports.html">التقارير</a>
+        <a href="about.html">المنهجية</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">نسخة استعراضية حية</span>
+          <h1>المنصة العربية التي تحول تعقيد السوق اليمنية إلى قرارات أوضح.</h1>
+          <p class="hero-text">
+            ريم إنسايت تجمع بين بيانات السوق، تحليل القطاعات التقنية، وتقييم الفرص الاستثمارية
+            في واجهة عربية خفيفة يمكن عرضها على الشركاء والممولين والعملاء المؤسسيين.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="opportunities.html">شاهد الفرص</a>
+            <a class="button button-secondary" href="reports.html">استعرض التقارير</a>
+          </div>
+          <ul class="hero-points">
+            <li>تركيز أولي على التقنية المالية والتجارة الرقمية والتعليم الرقمي وأنظمة الأعمال</li>
+            <li>نموذج أعمال هجين: اشتراكات + ملفات قطاعية + دراسات خاصة</li>
+            <li>جاهزة للتحول إلى GitHub Pages كنموذج عرض حي</li>
+          </ul>
+        </div>
+        <div class="hero-panel">
+          <div class="pulse-card">
+            <div class="pulse-header">
+              <span>نبض السوق</span>
+              <span class="badge">2026</span>
+            </div>
+            <div class="pulse-grid" id="hero-stats"></div>
+            <div class="mini-chart" aria-hidden="true">
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="metrics" id="key-metrics"></section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="eyebrow">ما الذي تقدمه المنصة؟</span>
+          <h2>ثلاث طبقات قيمة في منتج واحد</h2>
+          <p>النسخة الأولى مصممة لتبرهن الفكرة تجارياً، لا لتكون مجرد عرض بصري فقط.</p>
+        </div>
+        <div class="value-grid">
+          <article class="value-card">
+            <h3>ذكاء سوقي</h3>
+            <p>قراءة موجزة وواضحة للسوق اليمنية، القطاعات، اللاعبين، والفجوات.</p>
+          </article>
+          <article class="value-card">
+            <h3>تقييم فرص</h3>
+            <p>بطاقات استثمارية تقارن الجاذبية والمخاطر وسهولة التنفيذ.</p>
+          </article>
+          <article class="value-card">
+            <h3>خدمات مخصصة</h3>
+            <p>تحويل الاهتمام إلى إيراد مبكر عبر دراسات خاصة وتقارير مؤسسية.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="eyebrow">القطاعات ذات الأولوية</span>
+          <h2>المسار الأذكى للإطلاق</h2>
+          <p>اخترنا القطاعات الأقرب للطلب الفعلي، والأكثر قابلية للعرض على المستثمرين والعملاء.</p>
+        </div>
+        <div class="sector-overview-grid" id="featured-sectors"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="eyebrow">الفرص الأبرز</span>
+          <h2>نماذج جاهزة للنقاش مع الشركاء</h2>
+          <p>كل فرصة أدناه جزء من قاعدة أوسع يمكن توسيعها لاحقاً إلى لوحة ذكاء سوق كاملة.</p>
+        </div>
+        <div class="opportunity-grid compact" id="featured-opportunities"></div>
+      </section>
+
+      <section class="section cta-band">
+        <div class="cta-inline">
+          <div>
+            <span class="eyebrow">الخطوة التالية</span>
+            <h2>النسخة الحالية جاهزة كمنتج استعراضي ونقطة انطلاق للنشر.</h2>
+          </div>
+          <div class="hero-actions">
+            <a class="button button-primary" href="about.html">شاهد المنهجية</a>
+            <a class="button button-secondary" href="reports.html">راجع الباقات</a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>ريم إنسايت - منصة عربية لتحليل السوق اليمنية وتقييم الفرص الاستثمارية.</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

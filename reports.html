@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>التقارير والباقات | ريم إنسايت</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="reports">
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">ر</span>
+        <span class="brand-copy">
+          <strong>ريم إنسايت</strong>
+          <small>منصة استخبارات السوق اليمنية</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="فتح القائمة">القائمة</button>
+      <nav class="nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="sectors.html">القطاعات</a>
+        <a href="opportunities.html">الفرص</a>
+        <a href="reports.html">التقارير</a>
+        <a href="about.html">المنهجية</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <span class="eyebrow">المحتوى التجاري</span>
+        <h1>تقارير، ملفات قطاعية، وباقات اشتراك</h1>
+        <p>هذه الصفحة توضح كيف تتحول المنصة من منتج استعراضي إلى أصل تجاري يولد الإيراد منذ المراحل الأولى.</p>
+      </section>
+
+      <section class="section">
+        <div class="report-grid" id="report-grid"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="eyebrow">الباقات</span>
+          <h2>اشتراك للأفراد والمؤسسات</h2>
+        </div>
+        <div class="pricing-grid" id="pricing-grid"></div>
+      </section>
+
+      <section class="section cta">
+        <div class="cta-copy">
+          <span class="eyebrow">للشركاء والعملاء</span>
+          <h2>المنصة لا تبيع محتوى فقط، بل قراراً أوضح.</h2>
+          <p>يمكن استخدام هذه النسخة في عروض المستثمرين، لقاءات الشركاء، والبيع المباشر للجهات المؤسسية.</p>
+        </div>
+        <form class="contact-card">
+          <label>
+            <span>اسم الجهة</span>
+            <input type="text" placeholder="مثال: صندوق استثماري أو شركة">
+          </label>
+          <label>
+            <span>البريد</span>
+            <input type="email" placeholder="name@example.com">
+          </label>
+          <label>
+            <span>الاهتمام</span>
+            <select>
+              <option>اشتراك مؤسسي</option>
+              <option>طلب دراسة خاصة</option>
+              <option>شراكة استراتيجية</option>
+              <option>استثمار أولي</option>
+            </select>
+          </label>
+          <button class="button button-primary" type="button">إرسال الاهتمام</button>
+        </form>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>نموذج الدخل هنا مهيأ ليبدأ بالخدمات ثم يتوسع نحو الاشتراكات والمنتجات البياناتية.</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
