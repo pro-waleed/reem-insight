@@ -757,3 +757,7 @@ const appData = {
     }
   ]
 };
+
+if (typeof window !== "undefined") {
+  window.appData = appData;
+}
