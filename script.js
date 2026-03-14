@@ -73,6 +73,10 @@ const createOpportunityCard = (item) => {
   row.append(create("span", "", `مخاطر ${item.risk}`));
   article.append(row);
 
+  const link = create("a", "source-link", "عرض تفاصيل الفرصة");
+  link.href = `opportunity.html?slug=${item.slug}`;
+  article.append(link);
+
   return article;
 };
 
@@ -299,6 +303,94 @@ const renderReportDetail = () => {
   });
 };
 
+const renderInvestmentCase = () => {
+  const container = document.getElementById("investment-case");
+  if (!container || !window.appData) return;
+
+  const askCard = create("article", "investment-card featured-investment");
+  askCard.append(create("span", "signal-source", "الاحتياج التمويلي"));
+  askCard.append(create("strong", "signal-value", appData.investmentCase.ask));
+  askCard.append(create("p", "", appData.investmentCase.thesis));
+  container.append(askCard);
+
+  const whyCard = create("article", "investment-card");
+  whyCard.append(create("span", "signal-source", "لماذا يمكن أن تنجح؟"));
+  const list = create("ul", "bullet-list");
+  appData.investmentCase.whyWin.forEach((item) => list.append(create("li", "", item)));
+  whyCard.append(list);
+  container.append(whyCard);
+};
+
+const renderFinance = () => {
+  const container = document.getElementById("finance-grid");
+  if (!container || !window.appData) return;
+
+  appData.financeModel.forEach((item) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", item.label));
+    article.append(create("strong", "signal-value", item.value));
+    article.append(create("p", "", item.note));
+    container.append(article);
+  });
+};
+
+const renderRisks = () => {
+  const container = document.getElementById("risk-grid");
+  if (!container || !window.appData) return;
+
+  appData.riskMitigations.forEach((item) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", item.value));
+    article.append(create("h3", "", item.title));
+    article.append(create("p", "", item.context));
+    container.append(article);
+  });
+};
+
+const renderOpportunityDetail = () => {
+  const container = document.getElementById("opportunity-detail");
+  if (!container || !window.appData) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug") || appData.opportunities[0]?.slug;
+  const item = appData.opportunities.find((entry) => entry.slug === slug);
+  if (!item) return;
+
+  const hero = create("section", "report-hero");
+  hero.append(create("span", "eyebrow", item.label));
+  hero.append(create("h1", "", item.title));
+  hero.append(create("p", "hero-text", item.description));
+  container.append(hero);
+
+  const summary = create("section", "report-summary-card");
+  summary.append(create("h2", "", "ملخص الفرصة"));
+  summary.append(create("p", "", item.whyNow));
+
+  const grid = create("div", "report-highlight-grid");
+  [
+    `المشتري: ${item.buyer}`,
+    `الإيراد: ${item.revenueModel}`,
+    `الانطلاق: ${item.pilot}`
+  ].forEach((entry) => {
+    const card = create("article", "showcase-mini");
+    card.append(create("p", "", entry));
+    grid.append(card);
+  });
+  summary.append(grid);
+  container.append(summary);
+
+  [
+    { heading: "المشكلة", text: item.problem },
+    { heading: "نطاق النسخة الأولى", text: item.buildScope },
+    { heading: "الميزة التنافسية المحتملة", text: item.moat }
+  ].forEach((section) => {
+    const block = create("section", "report-section");
+    block.append(create("h2", "", section.heading));
+    block.append(create("p", "", section.text));
+    container.append(block);
+  });
+};
+
 const setupMenu = () => {
   const button = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".nav");
@@ -332,5 +424,9 @@ renderPricing();
 renderSources();
 renderPlayers();
 renderReportDetail();
+renderInvestmentCase();
+renderFinance();
+renderRisks();
+renderOpportunityDetail();
 setupMenu();
 markCurrentPage();

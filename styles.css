@@ -439,6 +439,20 @@ a {
   gap: 1rem;
 }
 
+.investment-hero,
+.finance-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.investment-hero {
+  grid-template-columns: 1.1fr 0.9fr;
+}
+
+.finance-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .opportunity-card.hidden {
   display: none;
 }
@@ -502,6 +516,7 @@ a {
 }
 
 .player-card,
+.investment-card,
 .report-summary-card,
 .report-section {
   padding: 1.35rem;
@@ -543,6 +558,17 @@ a {
 
 .print-hide {
   display: block;
+}
+
+.featured-investment {
+  background: linear-gradient(180deg, rgba(23, 76, 82, 0.94), rgba(27, 57, 60, 0.98));
+  color: #fff8ee;
+}
+
+.featured-investment p,
+.featured-investment .signal-source,
+.featured-investment .signal-value {
+  color: inherit;
 }
 
 .showcase-card {
@@ -691,6 +717,8 @@ textarea {
   .signal-grid,
   .source-grid,
   .player-grid,
+  .investment-hero,
+  .finance-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,
@@ -721,6 +749,8 @@ textarea {
   .signal-grid,
   .source-grid,
   .player-grid,
+  .investment-hero,
+  .finance-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,
