@@ -491,6 +491,52 @@ const renderFinance = () => {
   });
 };
 
+const renderThreeYearPlan = () => {
+  const container = document.getElementById("three-year-grid");
+  if (!container || !window.appData || !appData.threeYearPlan) return;
+
+  appData.threeYearPlan.forEach((item) => {
+    const article = create("article", "investment-card");
+    article.append(create("span", "signal-source", item.year));
+    article.append(create("strong", "signal-value", item.revenue));
+
+    const meta = create("div", "study-meta");
+    meta.append(create("span", "data-pill", `الهامش الإجمالي: ${item.grossMargin}`));
+    meta.append(create("span", "data-pill", `الحسابات المدفوعة: ${item.paidAccounts}`));
+    meta.append(create("span", "data-pill", `الدراسات الخاصة: ${item.customStudies}`));
+    article.append(meta);
+
+    article.append(create("p", "", item.note));
+    container.append(article);
+  });
+};
+
+const renderUseOfFunds = () => {
+  const container = document.getElementById("use-of-funds");
+  if (!container || !window.appData || !appData.useOfFunds) return;
+
+  appData.useOfFunds.forEach((item) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", item.title));
+    article.append(create("strong", "signal-value", item.value));
+    article.append(create("p", "", item.context));
+    container.append(article);
+  });
+};
+
+const renderTractionMilestones = () => {
+  const container = document.getElementById("traction-grid");
+  if (!container || !window.appData || !appData.tractionMilestones) return;
+
+  appData.tractionMilestones.forEach((item) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", item.title));
+    article.append(create("strong", "signal-value", item.value));
+    article.append(create("p", "", item.context));
+    container.append(article);
+  });
+};
+
 const renderRisks = () => {
   const container = document.getElementById("risk-grid");
   if (!container || !window.appData) return;
@@ -710,6 +756,9 @@ renderPlayers();
 renderReportDetail();
 renderInvestmentCase();
 renderFinance();
+renderThreeYearPlan();
+renderUseOfFunds();
+renderTractionMilestones();
 renderRisks();
 renderRevenueMix();
 renderOpportunityDetail();
