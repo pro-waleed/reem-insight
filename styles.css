@@ -440,7 +440,9 @@ a {
 }
 
 .investment-hero,
-.finance-grid {
+.finance-grid,
+.service-grid,
+.city-grid {
   display: grid;
   gap: 1rem;
 }
@@ -450,6 +452,14 @@ a {
 }
 
 .finance-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.service-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.city-grid {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
@@ -517,6 +527,8 @@ a {
 
 .player-card,
 .investment-card,
+.service-card,
+.city-card,
 .report-summary-card,
 .report-section {
   padding: 1.35rem;
@@ -569,6 +581,22 @@ a {
 .featured-investment .signal-source,
 .featured-investment .signal-value {
   color: inherit;
+}
+
+.city-stats {
+  display: grid;
+  gap: 0.45rem;
+  margin: 0.9rem 0;
+}
+
+.city-stats span {
+  display: inline-block;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(23, 76, 82, 0.08);
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 0.92rem;
 }
 
 .showcase-card {
@@ -719,6 +747,8 @@ textarea {
   .player-grid,
   .investment-hero,
   .finance-grid,
+  .service-grid,
+  .city-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,
@@ -751,6 +781,8 @@ textarea {
   .player-grid,
   .investment-hero,
   .finance-grid,
+  .service-grid,
+  .city-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,

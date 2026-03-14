@@ -200,6 +200,46 @@ const renderPricing = () => {
   });
 };
 
+const renderServices = () => {
+  const container = document.getElementById("service-grid");
+  if (!container || !window.appData) return;
+
+  appData.servicePackages.forEach((pkg) => {
+    const article = create("article", "service-card");
+    article.append(create("span", "signal-source", pkg.audience));
+    article.append(create("h3", "", pkg.name));
+    article.append(create("strong", "signal-value", pkg.price));
+    article.append(create("p", "opportunity-pilot", `مدة التسليم: ${pkg.turnaround}`));
+
+    const list = create("ul", "bullet-list");
+    pkg.services.forEach((item) => list.append(create("li", "", item)));
+    article.append(list);
+    container.append(article);
+  });
+};
+
+const renderCities = () => {
+  const container = document.getElementById("city-grid");
+  if (!container || !window.appData) return;
+
+  appData.demoCityData.forEach((city) => {
+    const article = create("article", "city-card");
+    article.append(create("h3", "", city.city));
+    article.append(create("span", "signal-source", `الحجم السكاني: ${city.populationBand}`));
+
+    const stats = create("div", "city-stats");
+    [
+      `الطلب الرقمي ${city.digitalDemand}`,
+      `جاهزية FinTech ${city.fintechReadiness}`,
+      `جاهزية التجارة ${city.commerceReadiness}`
+    ].forEach((item) => stats.append(create("span", "", item)));
+
+    article.append(stats);
+    article.append(create("p", "", city.note));
+    container.append(article);
+  });
+};
+
 const renderSources = () => {
   const container = document.getElementById("source-notes");
   if (!container || !window.appData) return;
@@ -347,6 +387,19 @@ const renderRisks = () => {
   });
 };
 
+const renderRevenueMix = () => {
+  const container = document.getElementById("revenue-mix");
+  if (!container || !window.appData) return;
+
+  appData.revenueMix.forEach((item) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", item.title));
+    article.append(create("strong", "signal-value", item.value));
+    article.append(create("p", "", item.context));
+    container.append(article);
+  });
+};
+
 const renderOpportunityDetail = () => {
   const container = document.getElementById("opportunity-detail");
   if (!container || !window.appData) return;
@@ -421,12 +474,15 @@ renderSectorSignals();
 renderOpportunityFilters();
 renderReports();
 renderPricing();
+renderServices();
+renderCities();
 renderSources();
 renderPlayers();
 renderReportDetail();
 renderInvestmentCase();
 renderFinance();
 renderRisks();
+renderRevenueMix();
 renderOpportunityDetail();
 setupMenu();
 markCurrentPage();
