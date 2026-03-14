@@ -284,6 +284,8 @@ a {
 .value-grid,
 .sector-overview-grid,
 .sector-detail-grid,
+.signal-grid,
+.source-grid,
 .report-grid,
 .pricing-grid,
 .roadmap-grid,
@@ -302,6 +304,8 @@ a {
 .value-card,
 .sector-overview-card,
 .sector-detail-card,
+.signal-card,
+.source-card,
 .opportunity-card,
 .report-card,
 .price-card,
@@ -424,6 +428,11 @@ a {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
+.signal-grid,
+.source-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
 .opportunity-card.hidden {
   display: none;
 }
@@ -440,6 +449,45 @@ a {
   padding-top: 1rem;
   border-top: 1px solid var(--line);
   color: var(--olive);
+  font-weight: 700;
+}
+
+.signal-source,
+.report-meta {
+  display: inline-block;
+  color: var(--gold-dark);
+  font-weight: 700;
+}
+
+.signal-value {
+  display: block;
+  margin: 0.7rem 0 0.5rem;
+  font-size: 1.7rem;
+}
+
+.opportunity-note,
+.opportunity-pilot {
+  margin-top: 0.7rem;
+  font-size: 0.95rem;
+}
+
+.opportunity-pilot {
+  color: var(--olive);
+}
+
+.showcase-mini,
+.signal-card,
+.source-card {
+  padding: 1.15rem;
+  border-radius: 1.2rem;
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid var(--line);
+}
+
+.source-link {
+  display: inline-flex;
+  margin-top: 0.8rem;
+  color: var(--teal);
   font-weight: 700;
 }
 
@@ -586,6 +634,8 @@ textarea {
   .value-grid,
   .sector-overview-grid,
   .sector-detail-grid,
+  .signal-grid,
+  .source-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,
@@ -613,6 +663,8 @@ textarea {
   .value-grid,
   .sector-overview-grid,
   .sector-detail-grid,
+  .signal-grid,
+  .source-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,

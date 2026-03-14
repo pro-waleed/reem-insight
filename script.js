@@ -2,12 +2,8 @@ const page = document.body.dataset.page;
 
 const create = (tag, className, content) => {
   const node = document.createElement(tag);
-  if (className) {
-    node.className = className;
-  }
-  if (content !== undefined) {
-    node.textContent = content;
-  }
+  if (className) node.className = className;
+  if (content !== undefined) node.textContent = content;
   return node;
 };
 
@@ -36,6 +32,20 @@ const renderMetrics = () => {
   });
 };
 
+const renderMarketSignals = () => {
+  const container = document.getElementById("market-signals");
+  if (!container || !window.appData) return;
+
+  appData.marketSignals.forEach((signal) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", signal.source));
+    article.append(create("strong", "signal-value", signal.value));
+    article.append(create("h3", "", signal.title));
+    article.append(create("p", "", signal.context));
+    container.append(article);
+  });
+};
+
 const renderFeaturedSectors = () => {
   const container = document.getElementById("featured-sectors");
   if (!container || !window.appData) return;
@@ -55,6 +65,8 @@ const createOpportunityCard = (item) => {
   article.append(create("span", "op-tag", item.label));
   article.append(create("h3", "", item.title));
   article.append(create("p", "", item.description));
+  article.append(create("p", "opportunity-note", item.whyNow));
+  article.append(create("p", "opportunity-pilot", `نقطة الانطلاق المقترحة: ${item.pilot}`));
 
   const row = create("div", "score-row");
   row.append(create("span", "", `جاذبية ${item.attraction}`));
@@ -84,11 +96,24 @@ const renderSectorDetails = () => {
     article.append(create("p", "", sector.text));
 
     const list = create("ul", "bullet-list");
-    sector.bullets.forEach((bullet) => {
-      list.append(create("li", "", bullet));
-    });
-
+    sector.bullets.forEach((bullet) => list.append(create("li", "", bullet)));
     article.append(list);
+    container.append(article);
+  });
+};
+
+const renderSectorSignals = () => {
+  const container = document.getElementById("sector-signals");
+  if (!container || !window.appData) return;
+
+  appData.sectors.forEach((sector) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", sector.title));
+    article.append(create("strong", "signal-value", sector.monetization));
+    article.append(create("h3", "", "محفزات الطلب"));
+    article.append(create("p", "", sector.demandDrivers.join(" - ")));
+    article.append(create("h3", "", "المشترون المحتملون"));
+    article.append(create("p", "", sector.personas.join(" - ")));
     container.append(article);
   });
 };
@@ -123,7 +148,6 @@ const renderOpportunityFilters = () => {
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
       const filter = button.dataset.filter;
-
       filterButtons.forEach((item) => item.classList.remove("active"));
       button.classList.add("active");
 
@@ -144,6 +168,7 @@ const renderReports = () => {
     article.append(create("h3", "", report.title));
     article.append(create("p", "", report.text));
     article.append(create("span", "", report.subtext));
+    article.append(create("small", "report-meta", report.meta));
     container.append(article);
   });
 };
@@ -158,11 +183,28 @@ const renderPricing = () => {
     article.append(create("strong", "", plan.price));
 
     const list = create("ul", "bullet-list");
-    plan.features.forEach((feature) => {
-      list.append(create("li", "", feature));
-    });
-
+    plan.features.forEach((feature) => list.append(create("li", "", feature)));
     article.append(list);
+    container.append(article);
+  });
+};
+
+const renderSources = () => {
+  const container = document.getElementById("source-notes");
+  if (!container || !window.appData) return;
+
+  appData.sourceNotes.forEach((note) => {
+    const article = create("article", "source-card");
+    article.append(create("span", "signal-source", note.source));
+    article.append(create("h3", "", note.title));
+    article.append(create("p", "", note.summary));
+
+    const link = create("a", "source-link", "فتح المصدر");
+    link.href = note.url;
+    link.target = "_blank";
+    link.rel = "noreferrer";
+    article.append(link);
+
     container.append(article);
   });
 };
@@ -189,11 +231,14 @@ const markCurrentPage = () => {
 
 renderHeroStats();
 renderMetrics();
+renderMarketSignals();
 renderFeaturedSectors();
 renderFeaturedOpportunities();
 renderSectorDetails();
+renderSectorSignals();
 renderOpportunityFilters();
 renderReports();
 renderPricing();
+renderSources();
 setupMenu();
 markCurrentPage();
