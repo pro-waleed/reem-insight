@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>البيانات التجريبية | ريم إنسايت</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="data-room">
+  <div class="site-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">ر</span>
+        <span class="brand-copy">
+          <strong>ريم إنسايت</strong>
+          <small>منصة تحليل السوق اليمنية</small>
+        </span>
+      </a>
+      <button class="menu-toggle" type="button" aria-label="فتح القائمة">القائمة</button>
+      <nav class="nav">
+        <a href="index.html">الرئيسية</a>
+        <a href="sectors.html">القطاعات</a>
+        <a href="opportunities.html">الفرص</a>
+        <a href="companies.html">اللاعبون</a>
+        <a href="pricing.html">الباقات</a>
+        <a href="data-room.html">البيانات</a>
+        <a href="reports.html">التقارير</a>
+        <a href="investors.html">للمستثمرين</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <span class="eyebrow">البيانات التجريبية</span>
+        <h1>لوحة بيانات أولية أقرب لما يتوقعه المستخدم داخل المنصة</h1>
+        <p>هذه الصفحة تعرض بيانات تجريبية منطقية ومرتبة، لتقريب شكل المنصة النهائية أمام المستثمر أو العميل الرسمي.</p>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="eyebrow">جاذبية المدن</span>
+          <h2>أين يمكن أن يبدأ الطلب بشكل أسرع؟</h2>
+        </div>
+        <div class="city-grid" id="city-grid"></div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="eyebrow">جدول تجريبي</span>
+          <h2>مؤشرات أولية بحسب القطاع والمدينة</h2>
+          <p>الهدف من هذا الجدول ليس تقديم أرقام نهائية، بل توضيح شكل مخرجات المنصة عندما تتراكم البيانات الحقيقية.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="data-table" id="data-table">
+            <thead>
+              <tr>
+                <th>المدينة</th>
+                <th>القطاع</th>
+                <th>الطلب</th>
+                <th>المنافسة</th>
+                <th>سهولة الدخول</th>
+                <th>الجاذبية</th>
+              </tr>
+            </thead>
+            <tbody id="data-table-body"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-heading">
+          <span class="eyebrow">عينات طلب</span>
+          <h2>كيف تبدو الفرص عند ربطها بمدن وقطاعات؟</h2>
+        </div>
+        <div class="signal-grid" id="demand-samples"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <p>صفحة البيانات التجريبية تساعد على تحويل المنصة من عرض عام إلى منتج يبدو فعلاً قائماً على محتوى منظم وقابل للتوسع.</p>
+    </footer>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

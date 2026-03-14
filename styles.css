@@ -463,6 +463,37 @@ a {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.table-wrap {
+  overflow-x: auto;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.4rem;
+  box-shadow: var(--shadow);
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 760px;
+}
+
+.data-table th,
+.data-table td {
+  padding: 1rem;
+  text-align: right;
+  border-bottom: 1px solid var(--line);
+}
+
+.data-table th {
+  color: var(--gold-dark);
+  background: rgba(255, 250, 242, 0.9);
+  font-weight: 800;
+}
+
+.data-table tr:last-child td {
+  border-bottom: 0;
+}
+
 .opportunity-card.hidden {
   display: none;
 }

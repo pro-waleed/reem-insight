@@ -240,6 +240,34 @@ const renderCities = () => {
   });
 };
 
+const renderDataTable = () => {
+  const container = document.getElementById("data-table-body");
+  if (!container || !window.appData) return;
+
+  appData.demoTableRows.forEach((row) => {
+    const tr = document.createElement("tr");
+    [row.city, row.sector, row.demand, row.competition, row.entry, row.score].forEach((value) => {
+      const td = document.createElement("td");
+      td.textContent = value;
+      tr.append(td);
+    });
+    container.append(tr);
+  });
+};
+
+const renderDemandSamples = () => {
+  const container = document.getElementById("demand-samples");
+  if (!container || !window.appData) return;
+
+  appData.demandSamples.forEach((item) => {
+    const article = create("article", "signal-card");
+    article.append(create("span", "signal-source", item.title));
+    article.append(create("strong", "signal-value", item.value));
+    article.append(create("p", "", item.context));
+    container.append(article);
+  });
+};
+
 const renderDemoClients = () => {
   const container = document.getElementById("client-grid");
   if (!container || !window.appData) return;
@@ -491,6 +519,8 @@ renderReports();
 renderPricing();
 renderServices();
 renderCities();
+renderDataTable();
+renderDemandSamples();
 renderDemoClients();
 renderSources();
 renderPlayers();
