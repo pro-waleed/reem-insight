@@ -212,8 +212,9 @@ const renderPricing = () => {
     article.append(list);
 
     const actions = create("div", "plan-actions");
-    actions.append(createLinkButton("reports.html#interest-form", plan.cta, "button button-primary button-block"));
-    actions.append(create("span", "plan-meta", `مستوى الوصول: ${plan.access}`));
+    actions.append(createLinkButton(`subscribe.html?plan=${plan.slug}`, plan.cta, "button button-primary button-block"));
+    actions.append(create("span", "plan-meta", `مستوى الوصول: ${plan.access} | ${plan.seats}`));
+    actions.append(create("span", "plan-meta", `الدفع السنوي: ${plan.annualPrice} | ${plan.delivery}`));
     article.append(actions);
 
     container.append(article);
@@ -238,10 +239,11 @@ const renderStudies = () => {
     const meta = create("div", "study-meta");
     meta.append(create("span", "data-pill", `السعر: ${study.price}`));
     meta.append(create("span", "data-pill", `الوصول: ${study.access}`));
+    meta.append(create("span", "data-pill", `${study.pages} | ${study.updated}`));
     article.append(meta);
 
     const actions = create("div", "study-actions");
-    actions.append(createLinkButton("reports.html#interest-form", "شراء الدراسة", "button button-primary"));
+    actions.append(createLinkButton(`study.html?slug=${study.slug}`, "تفاصيل الدراسة", "button button-primary"));
     actions.append(createLinkButton("pricing.html", "مقارنة الباقات", "button button-secondary"));
     article.append(actions);
 
@@ -557,6 +559,113 @@ const renderOpportunityDetail = () => {
     block.append(create("p", "", section.text));
     container.append(block);
   });
+
+  const benchmark = appData.opportunityBenchmarks?.[item.slug];
+  if (benchmark) {
+    const section = create("section", "report-summary-card");
+    section.append(create("h2", "", "افتراضات التشغيل والعائد"));
+
+    const grid = create("div", "report-highlight-grid");
+    [
+      `عملاء تجريبيون: ${benchmark.pilotClients}`,
+      `السعر الشهري: ${benchmark.monthlyPrice}`,
+      `رسوم التهيئة: ${benchmark.setupFee}`,
+      `إيراد أول 12 شهراً: ${benchmark.firstYearRevenue}`,
+      `دورة البيع: ${benchmark.salesCycle}`,
+      `قنوات الوصول: ${benchmark.channels}`,
+      `مستوى الثقة: ${benchmark.confidence}`
+    ].forEach((entry) => {
+      const card = create("article", "showcase-mini");
+      card.append(create("p", "", entry));
+      grid.append(card);
+    });
+
+    section.append(grid);
+    container.append(section);
+  }
+};
+
+const renderSubscribeDetail = () => {
+  const container = document.getElementById("subscribe-detail");
+  if (!container || !window.appData) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("plan") || appData.pricing[0]?.slug;
+  const plan = appData.pricing.find((entry) => entry.slug === slug);
+  if (!plan) return;
+
+  const hero = create("section", "report-hero");
+  hero.append(create("span", "eyebrow", "طلب اشتراك"));
+  hero.append(create("h1", "", plan.name));
+  hero.append(create("p", "hero-text", `${plan.bestFor} مع ${plan.access}.`));
+  container.append(hero);
+
+  const summary = create("section", "report-summary-card");
+  summary.append(create("h2", "", "ملخص الباقة"));
+  summary.append(create("p", "", `السعر الشهري ${plan.price}، أو ${plan.annualPrice} عند الاشتراك السنوي. يتم ${plan.delivery} ويشمل ${plan.seats}.`));
+
+  const highlights = create("div", "report-highlight-grid");
+  [
+    `الوصول: ${plan.access}`,
+    `المقاعد: ${plan.seats}`,
+    `الدفع السنوي: ${plan.annualPrice}`,
+    `الأنسب لـ: ${plan.bestFor}`
+  ].forEach((entry) => {
+    const article = create("article", "showcase-mini");
+    article.append(create("p", "", entry));
+    highlights.append(article);
+  });
+  summary.append(highlights);
+  container.append(summary);
+
+  const features = create("section", "report-section");
+  features.append(create("h2", "", "ما الذي يتضمنه الاشتراك؟"));
+  const list = create("ul", "bullet-list");
+  plan.features.forEach((item) => list.append(create("li", "", item)));
+  features.append(list);
+  container.append(features);
+};
+
+const renderStudyDetail = () => {
+  const container = document.getElementById("study-detail");
+  if (!container || !window.appData || !appData.studies) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug") || appData.studies[0]?.slug;
+  const study = appData.studies.find((entry) => entry.slug === slug);
+  if (!study) return;
+
+  const hero = create("section", "report-hero");
+  hero.append(create("span", "eyebrow", study.type));
+  hero.append(create("h1", "", study.title));
+  hero.append(create("p", "hero-text", study.summary));
+  container.append(hero);
+
+  const summary = create("section", "report-summary-card");
+  summary.append(create("h2", "", "ملخص المنتج"));
+  summary.append(create("p", "", `الدراسة موجهة إلى ${study.audience}. تتاح بصيغة ${study.format}، وتم تحديثها في ${study.updated}.`));
+
+  const highlights = create("div", "report-highlight-grid");
+  [
+    `السعر: ${study.price}`,
+    `الوصول: ${study.access}`,
+    `الحجم: ${study.pages}`,
+    `التحديث: ${study.updated}`
+  ].forEach((entry) => {
+    const article = create("article", "showcase-mini");
+    article.append(create("p", "", entry));
+    highlights.append(article);
+  });
+  summary.append(highlights);
+  container.append(summary);
+
+  const keyFindings = create("section", "report-section");
+  keyFindings.append(create("h2", "", "أبرز ما تتضمنه الدراسة"));
+  const list = create("ul", "bullet-list");
+  study.keyPoints.forEach((item) => list.append(create("li", "", item)));
+  keyFindings.append(list);
+  keyFindings.append(createLinkButton(`subscribe.html?plan=reem-pro`, "الوصول عبر ريم برو", "button button-primary"));
+  container.append(keyFindings);
 };
 
 const setupMenu = () => {
@@ -604,5 +713,7 @@ renderFinance();
 renderRisks();
 renderRevenueMix();
 renderOpportunityDetail();
+renderSubscribeDetail();
+renderStudyDetail();
 setupMenu();
 markCurrentPage();
