@@ -433,7 +433,17 @@ a {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
 
+.player-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
 .opportunity-card.hidden {
+  display: none;
+}
+
+.player-card.hidden {
   display: none;
 }
 
@@ -489,6 +499,50 @@ a {
   margin-top: 0.8rem;
   color: var(--teal);
   font-weight: 700;
+}
+
+.player-card,
+.report-summary-card,
+.report-section {
+  padding: 1.35rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 1.4rem;
+  box-shadow: var(--shadow);
+}
+
+.report-shell {
+  width: min(980px, calc(100% - 2rem));
+}
+
+.report-hero {
+  padding: 2rem 0 1rem;
+}
+
+.report-hero h1,
+.report-summary-card h2,
+.report-section h2 {
+  margin: 0.9rem 0 0.7rem;
+}
+
+.report-summary-card,
+.report-section {
+  margin-top: 1rem;
+}
+
+.report-highlight-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.report-topbar {
+  position: static;
+}
+
+.print-hide {
+  display: block;
 }
 
 .showcase-card {
@@ -636,6 +690,7 @@ textarea {
   .sector-detail-grid,
   .signal-grid,
   .source-grid,
+  .player-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,
@@ -665,6 +720,7 @@ textarea {
   .sector-detail-grid,
   .signal-grid,
   .source-grid,
+  .player-grid,
   .showcase-grid,
   .report-grid,
   .pricing-grid,
@@ -701,5 +757,32 @@ textarea {
   .cta-inline {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+@media print {
+  body {
+    background: white;
+  }
+
+  .print-hide,
+  .report-topbar .button-secondary,
+  .menu-toggle,
+  .nav {
+    display: none !important;
+  }
+
+  .site-shell,
+  .report-shell {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .report-summary-card,
+  .report-section,
+  .showcase-mini {
+    box-shadow: none;
+    background: white;
   }
 }

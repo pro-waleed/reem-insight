@@ -169,6 +169,13 @@ const renderReports = () => {
     article.append(create("p", "", report.text));
     article.append(create("span", "", report.subtext));
     article.append(create("small", "report-meta", report.meta));
+
+    if (report.slug) {
+      const link = create("a", "source-link", "فتح التقرير");
+      link.href = `report.html?slug=${report.slug}`;
+      article.append(link);
+    }
+
     container.append(article);
   });
 };
@@ -209,6 +216,89 @@ const renderSources = () => {
   });
 };
 
+const renderPlayers = () => {
+  const filterBar = document.getElementById("company-filter-bar");
+  const grid = document.getElementById("player-grid");
+  if (!filterBar || !grid || !window.appData) return;
+
+  const filters = [
+    { id: "all", label: "الكل" },
+    { id: "fintech", label: "FinTech" },
+    { id: "commerce", label: "E-commerce" },
+    { id: "edtech", label: "EdTech" },
+    { id: "saas", label: "SME SaaS" },
+    { id: "support", label: "جهات داعمة" }
+  ];
+
+  filters.forEach((filter, index) => {
+    const button = create("button", `filter${index === 0 ? " active" : ""}`, filter.label);
+    button.type = "button";
+    button.dataset.filter = filter.id;
+    filterBar.append(button);
+  });
+
+  appData.players.forEach((player) => {
+    const article = create("article", "player-card");
+    article.dataset.category = player.category;
+    article.append(create("span", "signal-source", player.type));
+    article.append(create("h3", "", player.name));
+    article.append(create("p", "", player.focus));
+    article.append(create("p", "opportunity-note", player.note));
+    grid.append(article);
+  });
+
+  const filterButtons = filterBar.querySelectorAll(".filter");
+  const cards = grid.querySelectorAll(".player-card");
+
+  filterButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const filter = button.dataset.filter;
+      filterButtons.forEach((item) => item.classList.remove("active"));
+      button.classList.add("active");
+      cards.forEach((card) => {
+        const matches = filter === "all" || card.dataset.category === filter;
+        card.classList.toggle("hidden", !matches);
+      });
+    });
+  });
+};
+
+const renderReportDetail = () => {
+  const container = document.getElementById("report-detail");
+  if (!container || !window.appData) return;
+
+  const params = new URLSearchParams(window.location.search);
+  const slug = params.get("slug") || "market-overview";
+  const report = appData.reportBriefs[slug];
+  if (!report) return;
+
+  const hero = create("section", "report-hero");
+  hero.append(create("span", "eyebrow", "تقرير قطاعي استعراضي"));
+  hero.append(create("h1", "", report.title));
+  hero.append(create("p", "hero-text", report.subtitle));
+  container.append(hero);
+
+  const summary = create("section", "report-summary-card");
+  summary.append(create("h2", "", "ملخص تنفيذي"));
+  summary.append(create("p", "", report.summary));
+
+  const highlights = create("div", "report-highlight-grid");
+  report.highlights.forEach((item) => {
+    const article = create("article", "showcase-mini");
+    article.append(create("p", "", item));
+    highlights.append(article);
+  });
+  summary.append(highlights);
+  container.append(summary);
+
+  report.sections.forEach((section) => {
+    const block = create("section", "report-section");
+    block.append(create("h2", "", section.heading));
+    block.append(create("p", "", section.text));
+    container.append(block);
+  });
+};
+
 const setupMenu = () => {
   const button = document.querySelector(".menu-toggle");
   const nav = document.querySelector(".nav");
@@ -240,5 +330,7 @@ renderOpportunityFilters();
 renderReports();
 renderPricing();
 renderSources();
+renderPlayers();
+renderReportDetail();
 setupMenu();
 markCurrentPage();
