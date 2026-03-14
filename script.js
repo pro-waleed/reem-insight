@@ -240,6 +240,21 @@ const renderCities = () => {
   });
 };
 
+const renderDemoClients = () => {
+  const container = document.getElementById("client-grid");
+  if (!container || !window.appData) return;
+
+  appData.demoClients.forEach((client) => {
+    const article = create("article", "service-card");
+    article.append(create("span", "signal-source", "حالة تجريبية"));
+    article.append(create("h3", "", client.name));
+    article.append(create("p", "", `الاحتياج: ${client.need}`));
+    article.append(create("p", "opportunity-note", `الخدمة: ${client.solution}`));
+    article.append(create("p", "opportunity-pilot", `النتيجة المتوقعة: ${client.outcome}`));
+    container.append(article);
+  });
+};
+
 const renderSources = () => {
   const container = document.getElementById("source-notes");
   if (!container || !window.appData) return;
@@ -476,6 +491,7 @@ renderReports();
 renderPricing();
 renderServices();
 renderCities();
+renderDemoClients();
 renderSources();
 renderPlayers();
 renderReportDetail();
